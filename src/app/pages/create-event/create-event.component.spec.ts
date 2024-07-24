@@ -20,7 +20,23 @@ describe('CreateEventComponent', () => {
     fixture.detectChanges();
   });
 
+  afterEach(() => {
+    fixture.destroy();
+  });
+
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should update todayDate correctly in updateTodayDate method', () => {
+    const today = new Date().toISOString().split('T')[0];
+    component.updateTodayDate();
+    expect(component.todayDate).toBe(today);
+  });
+
+  it('should update todayDate correctly in updateTodayDate method', () => {
+    const today = new Date().toISOString().split('T')[0];
+    component.updateTodayDate();
+    expect(component.todayDate).toBe(today);
   });
 });

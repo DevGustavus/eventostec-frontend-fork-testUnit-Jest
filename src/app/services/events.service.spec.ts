@@ -41,7 +41,7 @@ describe('EventsService', () => {
       });
 
       const req = httpMock.expectOne(
-        'http://localhost:3000/api/event?page=0&size=10',
+        'http://localhost:3000/events?page=0&size=10',
       );
       req.flush([EVENT_MOCK]);
 
@@ -54,7 +54,7 @@ describe('EventsService', () => {
         expect(response).toEqual([EVENT_MOCK]);
       });
       const req = httpMock.expectOne(
-        'http://localhost:3000/api/event?page=0&size=10',
+        'http://localhost:3000/events?page=0&size=10',
       );
 
       req.flush([EVENT_MOCK]);
@@ -69,7 +69,7 @@ describe('EventsService', () => {
         event = body;
       });
 
-      const req = httpMock.expectOne('http://localhost:3000/api/event/1');
+      const req = httpMock.expectOne('http://localhost:3000/events/1');
       req.flush(EVENT_MOCK);
 
       expect(event).toEqual(EVENT_MOCK);
@@ -81,7 +81,7 @@ describe('EventsService', () => {
         expect(response).toEqual(EVENT_MOCK);
       });
 
-      const req = httpMock.expectOne('http://localhost:3000/api/event/1');
+      const req = httpMock.expectOne('http://localhost:3000/events/1');
 
       req.flush(EVENT_MOCK);
       expect(req.request.method).toEqual('GET');
@@ -95,7 +95,7 @@ describe('EventsService', () => {
       eventsService.createEvent(mockedEventItem).subscribe((response) => {
         event = response;
       });
-      const req = httpMock.expectOne('http://localhost:3000/api/event');
+      const req = httpMock.expectOne('http://localhost:3000/events');
 
       req.flush(EVENT_MOCK);
 
@@ -107,7 +107,7 @@ describe('EventsService', () => {
       const mockedEventItem = new FormData();
       mockedEventItem.append('title', 'Event title');
       eventsService.createEvent(mockedEventItem).subscribe();
-      const req = httpMock.expectOne('http://localhost:3000/api/event');
+      const req = httpMock.expectOne('http://localhost:3000/events');
 
       req.flush(EVENT_MOCK);
 
@@ -124,7 +124,7 @@ describe('EventsService', () => {
         },
         error: (error) => (httpErrorResponse = error),
       });
-      const req = httpMock.expectOne('http://localhost:3000/api/event');
+      const req = httpMock.expectOne('http://localhost:3000/events');
       req.flush('Server error', CREATE_EVENT_ERROR_RESPONSE_MOCK);
 
       if (!httpErrorResponse) {

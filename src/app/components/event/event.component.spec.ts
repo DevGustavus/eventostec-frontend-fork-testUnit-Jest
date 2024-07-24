@@ -3,10 +3,21 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EventComponent } from './event.component';
 import { EVENT_MOCK } from '../../../__mocks__/events';
 import { By } from '@angular/platform-browser';
+import {
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting,
+} from '@angular/platform-browser-dynamic/testing';
 
 describe('EventComponent', () => {
   let component: EventComponent;
   let fixture: ComponentFixture<EventComponent>;
+
+  beforeAll(() => {
+    TestBed.initTestEnvironment(
+      BrowserDynamicTestingModule,
+      platformBrowserDynamicTesting(),
+    );
+  });
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

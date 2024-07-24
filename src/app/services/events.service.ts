@@ -14,7 +14,7 @@ export class EventsService {
 
   getEvents(page: number = 0, size: number = 10): Observable<EventItem[]> {
     return this.http
-      .get<EventItem[]>(`${this.APIurl}/api/event?page=${page}&size=${size}`)
+      .get<EventItem[]>(`${this.APIurl}/events?page=${page}&size=${size}`)
       .pipe(
         catchError(() => {
           return of([]);
@@ -32,7 +32,7 @@ export class EventsService {
     return this.http
       .get<
         EventItem[]
-      >(`${this.APIurl}/api/event/filter?page=${page}&size=20&city=${city}&uf=${uf}&startDate=${startDate}&endDate=${endDate}`)
+      >(`${this.APIurl}/events/filter?page=${page}&size=20&city=${city}&uf=${uf}&startDate=${startDate}&endDate=${endDate}`)
       .pipe(
         catchError(() => {
           return of([]);
@@ -41,10 +41,10 @@ export class EventsService {
   }
 
   createEvent(event: FormData) {
-    return this.http.post(`${this.APIurl}/api/event`, event);
+    return this.http.post(`${this.APIurl}/events`, event);
   }
 
   getEventById(id: string): Observable<EventItem> {
-    return this.http.get<EventItem>(`${this.APIurl}/api/event/${id}`);
+    return this.http.get<EventItem>(`${this.APIurl}/events/${id}`);
   }
 }

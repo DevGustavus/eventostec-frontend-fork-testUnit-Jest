@@ -12,6 +12,6 @@ export class CouponService {
   constructor(private http: HttpClient) {}
 
   createEvent(data: Coupon, eventId: string) {
-    return this.http.post(`${this.APIurl}/api/coupon/event/${eventId}`, data);
+    return this.http.post(`${this.APIurl}/coupon/event/${eventId}`, data);
   }
 }
