@@ -16,4 +16,8 @@ export class EventComponent {
   @Input() state: string = '';
   @Input() bannerUrl: string = '';
   @Input() url: string = '';
+
+  sum(a: number, b: number): number {
+    return a + b;
+  }
 }

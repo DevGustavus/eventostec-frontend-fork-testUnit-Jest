@@ -6,8 +6,12 @@
   "overrides": [
     {
       "files": [
-        "*.ts"
+        "*.ts",
+        "tests/**/*"
       ],
+      "env": {
+        "jest": true
+      },
       "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
