@@ -15,6 +15,7 @@ import { UF } from '../../types/UF.type';
 import { URLRegexValidator } from '../../utils/url-regex-validator.util';
 import { Router } from '@angular/router';
 import { FooterComponent } from '../../components/footer/footer.component';
+import { HeaderComponent } from '../../components/header/header.component';
 
 export interface CreateEventFormControl {
   title: FormControl<string | null>;
@@ -30,7 +31,12 @@ export interface CreateEventFormControl {
 @Component({
   selector: 'app-create-event',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FooterComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FooterComponent,
+    HeaderComponent,
+  ],
   templateUrl: './create-event.component.html',
 })
 export class CreateEventComponent implements OnInit {
