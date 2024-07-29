@@ -25,5 +25,24 @@ export const routes: Routes = [
         (c) => c.CreateEventComponent,
       ),
   },
+  {
+    path: 'criar-apresentador',
+    loadComponent: () =>
+      import('./pages/create-presenter/create-presenter.component').then(
+        (c) => c.CreatePresenterComponent,
+      ),
+  },
+  {
+    path: 'apresentador',
+    children: [
+      {
+        path: ':id',
+        loadComponent: () =>
+          import('./pages/presenter-details/presenter-details.component').then(
+            (c) => c.PresenterDetailsComponent,
+          ),
+      },
+    ],
+  },
   { path: '**', redirectTo: 'eventos' },
 ];

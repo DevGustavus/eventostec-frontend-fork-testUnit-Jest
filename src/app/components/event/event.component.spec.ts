@@ -33,11 +33,6 @@ describe('EventComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should return correct sum', () => {
-    expect(component.sum(1, 2)).toBe(3);
-    expect(component.sum(-1, 2)).toBe(1);
-  });
-
   describe('initial state rendering', () => {
     it('should render banner image', () => {
       const imageElement = fixture.debugElement.query(
