@@ -16,6 +16,8 @@ import { URLRegexValidator } from '../../utils/url-regex-validator.util';
 import { Router } from '@angular/router';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { HeaderComponent } from '../../components/header/header.component';
+import { Presenter } from '../../types/presenter.type';
+import { PresenterService } from '../../services/presenter.service';
 
 export interface CreateEventFormControl {
   title: FormControl<string | null>;
@@ -24,8 +26,9 @@ export interface CreateEventFormControl {
   date: FormControl<string | null>;
   city: FormControl<string | null>;
   state: FormControl<string | null>;
-  bannerFile: FormControl<File | null>;
+  imgUrl: FormControl<null>;
   url: FormControl<string | null>;
+  apresentador: FormControl<string | null>;
 }
 
 @Component({
@@ -42,6 +45,7 @@ export interface CreateEventFormControl {
 export class CreateEventComponent implements OnInit {
   filterService = inject(FilterService);
   eventsService = inject(EventsService);
+  presenterService = inject(PresenterService);
   router = inject(Router);
   createEventForm!: FormGroup;
   moreInformationExpanded = false;
@@ -52,6 +56,7 @@ export class CreateEventComponent implements OnInit {
   todayDate!: string;
   validDate: boolean = true;
   maxDate: string = '2030-01-01';
+  presenters: Presenter[] = [];
 
   isLoading = signal(false);
 
@@ -64,9 +69,11 @@ export class CreateEventComponent implements OnInit {
       city: new FormControl(null, [Validators.required]),
       state: new FormControl(null, [Validators.required]),
       url: new FormControl(null, [Validators.pattern(URLRegexValidator)]),
-      bannerFile: new FormControl(null),
+      imgUrl: new FormControl(null, [Validators.pattern(URLRegexValidator)]),
+      apresentador: new FormControl(null, [Validators.required]),
     });
     this.getLocales();
+    this.loadPresenters();
   }
 
   updateTodayDate() {
@@ -129,25 +136,22 @@ export class CreateEventComponent implements OnInit {
     }
 
     if (this.validDate) {
-      const data = new FormData();
-      data.append('title', this.createEventForm.value.title);
-      data.append('description', this.createEventForm.value.description);
-      data.append('image', this.createEventForm.value.bannerFile);
-      data.append('state', this.createEventForm.value.state ?? '');
-      data.append('city', this.createEventForm.value.city ?? '');
-      data.append('eventUrl', this.createEventForm.value.url);
-      data.append(
-        'remote',
-        this.createEventForm.value.type == EventType.ONLINE ? 'true' : 'false',
-      );
-      data.append(
-        'date',
-        new Date(this.createEventForm.value?.date?.toString())
+      const eventData = {
+        title: this.createEventForm.value.title,
+        description: this.createEventForm.value.description,
+        imgUrl: this.createEventForm.value.imgUrl,
+        state: this.createEventForm.value.state ?? '',
+        city: this.createEventForm.value.city ?? '',
+        eventUrl: this.createEventForm.value.url,
+        remote:
+          this.createEventForm.value.type === EventType.ONLINE ? true : false,
+        date: new Date(this.createEventForm.value?.date?.toString())
           .getTime()
           .toString(),
-      );
+        coupons: [],
+      };
 
-      this.eventsService.createEvent(data).subscribe({
+      this.eventsService.createEvent(eventData).subscribe({
         next: () => {
           this.isLoading.set(false);
           this.router.navigate(['/']);
@@ -231,5 +235,22 @@ export class CreateEventComponent implements OnInit {
     }
     stateControl?.updateValueAndValidity();
     cityControl?.updateValueAndValidity();
+  }
+
+  loadPresenters() {
+    this.presenterService.getPresenters().subscribe({
+      next: (presenters: Presenter[]) => {
+        this.presenters = presenters;
+      },
+      error: (error) => {
+        console.error('Erro ao carregar presenters:', error);
+      },
+    });
+  }
+
+  addPresenter(presenter: Presenter) {
+    if (!this.presenters.includes(presenter)) {
+      this.presenters.push(presenter);
+    }
   }
 }

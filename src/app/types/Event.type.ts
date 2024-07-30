@@ -1,4 +1,5 @@
 import { Coupon } from './Coupon.type';
+import { Presenter } from './presenter.type';
 
 export enum EventType {
   ONLINE = 'Remoto',
@@ -6,7 +7,7 @@ export enum EventType {
 }
 
 export type EventItem = {
-  id: string;
+  id?: string;
   title: string;
   remote: boolean;
   description: string;
@@ -16,4 +17,5 @@ export type EventItem = {
   imgUrl: string;
   eventUrl: string;
   coupons?: Coupon[];
+  apresentador?: Presenter[];
 };

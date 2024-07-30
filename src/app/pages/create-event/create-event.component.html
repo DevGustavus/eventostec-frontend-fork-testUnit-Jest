@@ -313,8 +313,41 @@
           />
         </div>
       </div>
+
       <div class="sm:col-span-2">
-        <div class="flex justify-center items-center">
+        <label
+          for="apresentador"
+          class="block text-sm font-semibold leading-6 text-kipperdev-purple-dark"
+        >
+          Apresentador
+          @if (!validDate && createEventForm.get('apresentador')?.touched) {
+            <span class="text-xs text-red-500">Apresentador inválido</span>
+          }
+        </label>
+        <div class="mt-2.5">
+          <ul>
+            <li
+              *ngFor="let presenter of presenters"
+              class="flex items-center justify-between"
+            >
+              <span>{{ presenter.name }}</span>
+              <button
+                type="button"
+                (click)="addPresenter(presenter)"
+                class="ml-4 text-sm text-blue-500 hover:underline"
+                [disabled]="presenters.includes(presenter)"
+              >
+                Adicionar
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="sm:col-span-2 flex flex-col gap-6 justify-center items-center w-full"
+      >
+        <div class="flex justify-center items-center w-full">
           <div class="w-full p-6 bg-white rounded-md shadow-lg">
             <h2 class="text-xl font-semibold text-center mb-6">
               Imagem do evento
@@ -355,9 +388,34 @@
                 *ngIf="createEventForm.get('bannerFile')?.value"
                 class="block text-sm text-gray-600 mt-2"
               >
-                {{ createEventForm.get('bannerFile')?.value.name }}
+                {{ createEventForm.get('bannerFile')?.value }}
               </span>
             </div>
+          </div>
+        </div>
+        <p>OU</p>
+        <div class="w-full">
+          <label
+            for="imgUrl"
+            class="block text-sm font-semibold leading-6 text-kipperdev-purple-dark"
+          >
+            URL da imagem
+            @if (
+              createEventForm.get('imgUrl')?.invalid &&
+              createEventForm.get('imgUrl')?.dirty &&
+              createEventForm.get('imgUrl')?.touched
+            ) {
+              <span class="text-xs text-red-500">*</span>
+            }
+          </label>
+          <div class="mt-2.5">
+            <input
+              formControlName="imgUrl"
+              type="text"
+              name="imgUrl"
+              id="imgUrl"
+              class="block w-full rounded-md border-0 px-3.5 py-2 text-kipperdev-purple-dark shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kipperdev-purple-primary sm:text-sm sm:leading-6"
+            />
           </div>
         </div>
       </div>

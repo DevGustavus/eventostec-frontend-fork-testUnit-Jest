@@ -1,24 +1,6 @@
 {
   "events": [
     {
-      "id": "f88b",
-      "title": "Game Developer",
-      "remote": false,
-      "description": "Bem-vindo ao nosso evento de tecnologia, um encontro imperdível para entusiastas, profissionais e inovadores do setor! Este evento está repleto de atividades, apresentações e oportunidades que prometem enriquecer o conhecimento e expandir as redes de contato dos participantes.\n\nPalestras Inspiradoras\nRenomados especialistas e líderes do setor compartilharão suas visões sobre as últimas tendências e inovações tecnológicas. As palestras cobrirão uma ampla gama de tópicos, incluindo inteligência artificial, blockchain, computação em nuvem, cibersegurança, e muito mais. Prepare-se para insights valiosos e debates acalorados sobre o futuro da tecnologia.\n\nWorkshops Práticos\nParticipe de workshops interativos que oferecerão uma experiência prática com as tecnologias emergentes. Desde desenvolvimento de software até técnicas avançadas de análise de dados, os workshops são projetados para todos os níveis de habilidade, proporcionando uma oportunidade única de aprender e crescer.",
-      "date": "2028-08-18T12:25:21.000+00:00",
-      "city": "Angra dos Reis",
-      "state": "RJ",
-      "eventUrl": "https://angular.dev/",
-      "imgUrl": "https://www.proway.com.br/foto/png/blog/750/workshop-gratuito-game-developer.jpg",
-      "coupons": [
-        {
-          "code": "KIPPERDEV",
-          "discount": 20,
-          "valid": "2028-08-18T12:25:21.000+00:00"
-        }
-      ]
-    },
-    {
       "id": "7d35",
       "title": "Conference Brazil 2028",
       "remote": "Remoto",
@@ -33,6 +15,11 @@
           "code": "KIPPERDEV",
           "discount": 20,
           "valid": "2028-08-18T12:25:21.000+00:00"
+        },
+        {
+          "code": "tropa da maré",
+          "discount": 2,
+          "valid": "2024-08-10T00:00:00.000Z"
         }
       ]
     },
@@ -53,6 +40,17 @@
           "valid": "2028-08-18T12:25:21.000+00:00"
         }
       ]
+    },
+    {
+      "id": "b907",
+      "title": "faz o L",
+      "description": "mimimi",
+      "imgUrl": "https://images3.memedroid.com/images/UPLOADED95/5e0b389f6be30.jpeg",
+      "state": "AC",
+      "city": "Acrelândia",
+      "eventUrl": "https://www.youtube.com/watch?v=hIQ1aW-_SaE",
+      "remote": false,
+      "date": "1723248000000"
     }
   ],
   "presenters": [

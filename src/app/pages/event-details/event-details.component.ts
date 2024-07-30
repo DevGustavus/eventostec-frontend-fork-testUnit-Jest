@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { switchMap } from 'rxjs';
-
 import { EventsService } from './../../services/events.service';
 import { ActivatedRoute } from '@angular/router';
 import { HeaderComponent } from '../../components/header/header.component';
@@ -63,31 +62,47 @@ export class EventDetailsComponent {
     this.isLoading.set(true);
 
     if (this.couponForm.valid) {
-      const data = {
-        valid: new Date(this.couponForm.value?.validity?.toString() || '')
-          .getTime()
-          .toString(),
+      const newCoupon = {
         code: this.couponForm.value?.code || '',
         discount: this.couponForm.value?.discount || 0,
+        valid: new Date(
+          this.couponForm.value?.validity?.toString() || '',
+        ).toISOString(),
       };
 
-      this.couponService
-        .createEvent(data, this.route.snapshot.params['id'])
-        .subscribe({
-          next: () => {
-            this.event$ = this.route.params.pipe(
-              switchMap((params) =>
-                this.eventsService.getEventById(params['id']),
-              ),
-            );
-            this.isLoading.set(false);
-            this.toggleModal();
-          },
-          error: (error) => {
-            this.isLoading.set(false);
-            console.error('Erro ao cadastrar evento:', error);
-          },
-        });
+      const eventId = this.route.snapshot.params['id'];
+
+      // Obter o evento atual
+      this.eventsService.getEventById(eventId).subscribe({
+        next: (event) => {
+          // Adicionar o novo cupom ao array de cupons existente
+          const updatedCoupons = event.coupons
+            ? [...event.coupons, newCoupon]
+            : [newCoupon];
+          const updatedEvent = { ...event, coupons: updatedCoupons };
+
+          // Atualizar o evento com o novo array de cupons
+          this.eventsService.updateEvent(eventId, updatedEvent).subscribe({
+            next: () => {
+              this.event$ = this.route.params.pipe(
+                switchMap((params) =>
+                  this.eventsService.getEventById(params['id']),
+                ),
+              );
+              this.isLoading.set(false);
+              this.toggleModal();
+            },
+            error: (error) => {
+              this.isLoading.set(false);
+              console.error('Erro ao atualizar evento:', error);
+            },
+          });
+        },
+        error: (error) => {
+          this.isLoading.set(false);
+          console.error('Erro ao recuperar evento:', error);
+        },
+      });
     }
   }
 }
