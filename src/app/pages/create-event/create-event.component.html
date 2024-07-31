@@ -325,22 +325,10 @@
           }
         </label>
         <div class="mt-2.5">
-          <ul>
-            <li
-              *ngFor="let presenter of presenters"
-              class="flex items-center justify-between"
-            >
-              <span>{{ presenter.name }}</span>
-              <button
-                type="button"
-                (click)="addPresenter(presenter)"
-                class="ml-4 text-sm text-blue-500 hover:underline"
-                [disabled]="presenters.includes(presenter)"
-              >
-                Adicionar
-              </button>
-            </li>
-          </ul>
+          <app-accordion
+            [presenters]="presenters"
+            (presenterAdded)="onPresenterAdded($event)"
+          ></app-accordion>
         </div>
       </div>
 
@@ -425,7 +413,7 @@
         (click)="createEvent()"
         type="submit"
         [disabled]="!createEventForm.valid || isLoading()"
-        class="block w-full rounded-md disabled:opacity-95 bg-kipperdev-purple-primary px-3.5 py-2.5 text-center text-sm sm:text-base font-semibold text-white shadow-sm hover:opacity-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kipperdev-purple-primary"
+        class="block w-full rounded-md disabled:opacity-95 bg-kipperdev-purple-primary px-3.5 py-2.5 text-center text-sm sm:text-base font-semibold text-white shadow-sm hover:opacity-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kipperdev-purple-primary cursor-pointer"
       >
         @if (!isLoading()) {
           Cadastrar evento

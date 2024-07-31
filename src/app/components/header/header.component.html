@@ -44,15 +44,15 @@
         <div>
           <button
             type="button"
-            class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+            class="inline-flex w-full justify-center gap-x-1.5 rounded-md ring-1 ring-inset ring-gray-300 hover:bg-purple-600 bg-kipperdev-purple-primary px-3 py-2 text-sm sm:text-base font-semibold text-white shadow-sm hover:opacity-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kipperdev-purple-primary"
             id="menu-button"
             aria-expanded="true"
             aria-haspopup="true"
             (click)="toggleDropdown()"
           >
-            Options
+            Menu Adicionar
             <svg
-              class="-mr-1 h-5 w-5 text-gray-400"
+              class="-mr-1 h-5 w-5 text-white"
               viewBox="0 0 20 20"
               fill="currentColor"
               aria-hidden="true"
@@ -65,30 +65,18 @@
             </svg>
           </button>
         </div>
-
-        <!--
-          Dropdown menu, show/hide based on menu state.
-
-          Entering: "transition ease-out duration-100"
-            From: "transform opacity-0 scale-95"
-            To: "transform opacity-100 scale-100"
-          Leaving: "transition ease-in duration-75"
-            From: "transform opacity-100 scale-100"
-            To: "transform opacity-0 scale-95"
-        -->
         @if (isDropdownOpen()) {
           <div
-            class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+            class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-blue-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="menu-button"
             tabindex="-1"
           >
             <div class="py-1" role="none">
-              <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
               <a
                 [routerLink]="['/criar-evento']"
-                class="block px-4 py-2 text-sm text-gray-700"
+                class="block px-4 py-2 text-sm text-gray-800 transform transition-transform duration-300 hover:scale-105"
                 role="menuitem"
                 tabindex="-1"
                 id="menu-item-0"
@@ -96,7 +84,7 @@
               >
               <a
                 [routerLink]="['/criar-apresentador']"
-                class="block px-4 py-2 text-sm text-gray-700"
+                class="block px-4 py-2 text-sm text-gray-700 transform transition-transform duration-300 hover:scale-105"
                 role="menuitem"
                 tabindex="-1"
                 id="menu-item-0"

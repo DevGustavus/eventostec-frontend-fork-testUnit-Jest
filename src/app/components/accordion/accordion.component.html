@@ -1,0 +1,28 @@
+<div class="presenter border border-gray-300 rounded-lg overflow-hidden">
+  <button
+    (click)="toggle()"
+    class="accordion-header w-full text-left bg-gray-100 p-4 cursor-pointer hover:bg-gray-200"
+  >
+    {{ selectedPresenter?.name }}
+  </button>
+  @if (expanded) {
+    <div class="accordion-body bg-gray-50">
+      <ul>
+        @for (presenter of presenters; track presenter) {
+          <li
+            class="accordion-item border-b border-gray-200 p-4 bg-white even:bg-gray-50 flex justify-between"
+          >
+            <span>{{ presenter.name }}</span>
+            <button
+              type="button"
+              (click)="addPresenter(presenter)"
+              class="ml-4 text-sm text-blue-500 hover:underline cursor-pointer"
+            >
+              Adicionar
+            </button>
+          </li>
+        }
+      </ul>
+    </div>
+  }
+</div>

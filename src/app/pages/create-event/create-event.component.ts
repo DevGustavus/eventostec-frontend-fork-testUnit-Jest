@@ -18,6 +18,7 @@ import { FooterComponent } from '../../components/footer/footer.component';
 import { HeaderComponent } from '../../components/header/header.component';
 import { Presenter } from '../../types/presenter.type';
 import { PresenterService } from '../../services/presenter.service';
+import { AccordionComponent } from '../../components/accordion/accordion.component';
 
 export interface CreateEventFormControl {
   title: FormControl<string | null>;
@@ -39,6 +40,7 @@ export interface CreateEventFormControl {
     ReactiveFormsModule,
     FooterComponent,
     HeaderComponent,
+    AccordionComponent,
   ],
   templateUrl: './create-event.component.html',
 })
@@ -74,6 +76,22 @@ export class CreateEventComponent implements OnInit {
     });
     this.getLocales();
     this.loadPresenters();
+  }
+
+  onPresenterAdded(presenter: Presenter) {
+    this.createEventForm.patchValue({ apresentador: presenter.name });
+    console.log('Presenter added to form:', presenter.name);
+  }
+
+  loadPresenters() {
+    this.presenterService.getPresenters().subscribe({
+      next: (presenters: Presenter[]) => {
+        this.presenters = presenters;
+      },
+      error: (error) => {
+        console.error('Erro ao carregar presenters:', error);
+      },
+    });
   }
 
   updateTodayDate() {
@@ -149,6 +167,7 @@ export class CreateEventComponent implements OnInit {
           .getTime()
           .toString(),
         coupons: [],
+        apresentador: this.createEventForm.value.apresentador,
       };
 
       this.eventsService.createEvent(eventData).subscribe({
@@ -235,22 +254,5 @@ export class CreateEventComponent implements OnInit {
     }
     stateControl?.updateValueAndValidity();
     cityControl?.updateValueAndValidity();
-  }
-
-  loadPresenters() {
-    this.presenterService.getPresenters().subscribe({
-      next: (presenters: Presenter[]) => {
-        this.presenters = presenters;
-      },
-      error: (error) => {
-        console.error('Erro ao carregar presenters:', error);
-      },
-    });
-  }
-
-  addPresenter(presenter: Presenter) {
-    if (!this.presenters.includes(presenter)) {
-      this.presenters.push(presenter);
-    }
   }
 }
