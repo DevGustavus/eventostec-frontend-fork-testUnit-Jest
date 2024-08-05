@@ -9,14 +9,24 @@ export const EVENT_MOCK: EventItem = {
   date: '2025-12-09',
   city: 'Angra dos Reis',
   state: 'RJ',
-  eventUrl: 'https://angular.dev/',
   imgUrl:
     'https://www.proway.com.br/foto/png/blog/750/workshop-gratuito-game-developer.jpg',
+  eventUrl: 'https://angular.dev/',
   coupons: [
     {
       code: 'KIPPERDEV',
       discount: 20,
       valid: '2024-08-18T12:25:21.000+00:00',
+    },
+  ],
+  apresentador: [
+    {
+      id: '1',
+      name: 'Carlos Silva',
+      nickname: 'Dev Ninja',
+      ocupation: 'Desenvolvedor',
+      imgUrl:
+        'https://www.proway.com.br/foto/png/blog/750/workshop-gratuito-game-developer.jpg',
     },
   ],
 };

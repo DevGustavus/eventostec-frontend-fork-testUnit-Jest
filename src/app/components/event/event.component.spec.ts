@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EventComponent } from './event.component';
 import { EVENT_MOCK } from '../../../__mocks__/events';
 import { By } from '@angular/platform-browser';
@@ -11,12 +10,15 @@ describe('EventComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [EventComponent],
+      providers: [],
     }).compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(EventComponent);
     component = fixture.componentInstance;
 
-    // Set initial input`s
+    // Set initial inputs
     component.title = EVENT_MOCK.title;
     component.type = EVENT_MOCK.remote ? 'Online' : 'Presencial';
     component.description = EVENT_MOCK.description;
@@ -33,31 +35,29 @@ describe('EventComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('initial state rendering', () => {
-    it('should render banner image', () => {
-      const imageElement = fixture.debugElement.query(
-        By.css('[data-testid="bannerImg"]'),
-      );
+  it('should render banner image', () => {
+    const imageElement = fixture.debugElement.query(
+      By.css('[data-testid="bannerImg"]'),
+    );
 
-      expect(imageElement.attributes['alt']).toEqual('banner do evento');
-      expect(imageElement.attributes['src']).toEqual(
-        'https://www.proway.com.br/foto/png/blog/750/workshop-gratuito-game-developer.jpg',
-      );
-    });
+    expect(imageElement.attributes['alt']).toEqual('banner do evento');
+    expect(imageElement.attributes['src']).toEqual(
+      'https://www.proway.com.br/foto/png/blog/750/workshop-gratuito-game-developer.jpg',
+    );
+  });
 
-    it('should render state and city detail', () => {
-      const stateAndCityElement = fixture.debugElement.query(
-        By.css('[data-testid="stateAndCity"]'),
-      );
-      const typeElement = fixture.debugElement.query(
-        By.css('[data-testid="type"]'),
-      );
+  it('should render state and city detail', () => {
+    const stateAndCityElement = fixture.debugElement.query(
+      By.css('[data-testid="stateAndCity"]'),
+    );
+    const typeElement = fixture.debugElement.query(
+      By.css('[data-testid="type"]'),
+    );
 
-      expect(stateAndCityElement).toBeDefined();
-      expect(typeElement).toBe(null);
-      expect(stateAndCityElement.nativeElement.textContent.trim()).toEqual(
-        'RJ, Angra dos Reis',
-      );
-    });
+    expect(stateAndCityElement).toBeDefined();
+    expect(typeElement).toBe(null);
+    expect(stateAndCityElement.nativeElement.textContent.trim()).toEqual(
+      'RJ, Angra dos Reis',
+    );
   });
 });

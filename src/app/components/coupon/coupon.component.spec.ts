@@ -9,8 +9,11 @@ describe('CouponComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CouponsComponent],
+      providers: [],
     }).compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(CouponsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
