@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HomeComponent } from './home.component';
 import { provideHttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -11,10 +10,10 @@ import { FilterService } from '../../services/filter.service';
 import { UF } from '../../types/UF.type';
 import { of } from 'rxjs';
 
-describe('EventsComponent', () => {
+describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
-  let filterService = TestBed.inject(FilterService);
+  let filterService: FilterService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -29,8 +28,8 @@ describe('EventsComponent', () => {
 
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
+    filterService = TestBed.inject(FilterService); // Injeção correta após configuração assíncrona
     fixture.detectChanges();
-    filterService = TestBed.inject(FilterService);
   });
 
   it('should create', () => {
@@ -43,11 +42,13 @@ describe('EventsComponent', () => {
       { id: 2, nome: 'Rio de Janeiro', sigla: 'RJ' },
     ];
 
-    spyOn(filterService, 'loadLocales').and.returnValue(of(mockLocales));
+    const spy = jest
+      .spyOn(filterService, 'loadLocales')
+      .mockReturnValue(of(mockLocales));
 
     component.loadLocalesFilter();
 
-    expect(filterService.loadLocales).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
     expect(component.states).toEqual([
       { id: 1, name: 'São Paulo', code: 'SP', label: 'São Paulo', value: 'SP' },
       {

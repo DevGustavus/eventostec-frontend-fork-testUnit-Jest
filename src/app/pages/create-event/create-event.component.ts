@@ -222,12 +222,14 @@ export class CreateEventComponent implements OnInit {
     });
   }
 
+  /*
   fileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.createEventForm.get('bannerFile')?.setValue(input.files[0]);
     }
   }
+  */
 
   handleEventType(type: EventType) {
     if (type === EventType.ONLINE) {
