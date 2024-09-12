@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ModalComponent } from './modal.component';
 import { By } from '@angular/platform-browser';
 import { signal } from '@angular/core';
@@ -28,7 +27,7 @@ describe('ModalComponent', () => {
   });
 
   describe('initial state rendering', () => {
-    it('should not render component when model is closed', () => {
+    it('should not render component when modal is closed', () => {
       component.isModalOpen.set(false);
       fixture.detectChanges();
 
@@ -39,7 +38,7 @@ describe('ModalComponent', () => {
       expect(modalContainerElement).toEqual(null);
     });
 
-    it('should render component when model is opened', () => {
+    it('should render component when modal is opened', () => {
       component.isModalOpen.set(true);
       fixture.detectChanges();
 
@@ -48,6 +47,16 @@ describe('ModalComponent', () => {
       );
 
       expect(modalContainerElement.nativeElement).toBeDefined();
+    });
+  });
+
+  describe('close method', () => {
+    it('should emit closeModal event when close is called', () => {
+      const closeModalSpy = jest.spyOn(component.closeModal, 'emit');
+
+      component.close();
+
+      expect(closeModalSpy).toHaveBeenCalled();
     });
   });
 });
